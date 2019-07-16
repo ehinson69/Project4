@@ -11,7 +11,6 @@ const keyboardBtns = document.getElementById('qwerty');
 
 //Required temporary test code to create instances.
 const phrase = new Phrase('Life is like a box of chocolates');
-console.log(`Phrase - phrase: ${phrase.phrase}`);//undefined in console?
 
 game = new Game();
 game.phrases.forEach((phrase, index) => {

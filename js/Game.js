@@ -5,7 +5,7 @@
 class Game {
     constructor() {
         this.missed = 0;
-        this.phrases = [];
+        this.phrases = ["You did it", "Don't give up", "We applaud you", "You got it", "Level up"];
         this.activePhrase = 'null';
     }
     
@@ -16,10 +16,4 @@ class Game {
         return this.phrases[index];
     };
 
-    //**Create phrases for use in game @return {array}
-    //*An array of phrases that could be used in the game*/
-    createPhrase() {
-        const randomPhrase = this.getRandomPhrase();
-        return new Phrase(randomPhrase);
-    }
 }
