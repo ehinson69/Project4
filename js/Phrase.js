@@ -6,9 +6,10 @@ class Phrase {
     constructor(phrase) {
         this.phrase = phrase;
     }
+    //**Display phrase on game board.*/
+    addPhraseToDisplay() {
+
+    };
+
 }
 console.log(new Phrase);
-//**Display phrase on game board.*/
-addPhraseToDisplay(){
-    
-};

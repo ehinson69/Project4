@@ -13,7 +13,7 @@ const keyboardBtns = document.getElementById('qwerty');
 const phrase = new Phrase('Life is like a box of chocolates');
 console.log(`Phrase - phrase: ${phrase.phrase}`);//undefined in console?
 
-const game = new Game();
+game = new Game();
 game.phrases.forEach((phrase, index) => {
     console.log(`Phrase ${index} - phrase: ${phrase.phrase}`);
 });
@@ -21,8 +21,6 @@ game.phrases.forEach((phrase, index) => {
 const logPhrase = (phrase) => {
     console.log(`Phrase - phrase: `, phrase.phrase);
 };
-
-const game = new Game();
 
 logPhrase(game.getRandomPhrase());
 logPhrase(game.getRandomPhrase());
