@@ -1,6 +1,6 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
- * Game.js */
+ * Game.js by Elizabeth Hinson */
 
 //Created a Game class method to start and end my game.
 class Game {
@@ -8,114 +8,84 @@ class Game {
         this.missed = 0;
         this.phrases = [ //added 5 new phrase objects.
             new Phrase("You did it"),
-            new Phrase("Don't give up"),
+            new Phrase("We made it"),
             new Phrase("We applaud you"),
             new Phrase("You got it"),
             new Phrase("Level up")
         ];
-        this.activePhrase = 'null';
+        this.activePhrase = null;
     };
-    //**Selects random phrase from phrases property @ return {Object}
-    //Phrase object chosen to be used. */
-    getRandomPhrase() {
-        let phraseIndex = Math.floor(Math.random() * this.phrases.length);
-        return this.phrases[phraseIndex];
+
+    createRandomPhrase() { //Selects random phrase from property
+        let phraseIndex = Math.floor(Math.random() * (this.phrases.length)); //Creating a variable to randomly chooses quote
+        return this.phrases[phraseIndex]; //Returns the phrase object chosen to be used
     };
+
     //***Begins game by selecting a random phrase and displaying it to user.*/
     startGame() {
-        $('#overlay').hide(); //hides the start screen overlay
-        this.activePhrase = this.getRandomPhrase();
+        $('#overlay').hide();
+        this.activePhrase = this.createRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
     };
 
-    // If the player has not revealed all the letters, they have no win.
+    //***Checks for winning move return {boolean}*/
+    //True if game has been won, false if game wasn't won.
     checkForWin() {
-        const letters = document.getElementsByClassName("letter");
-
-        for (let m = 0; m < letters.length; m++) {
-            if (letters[m].classList.contains("hide"))
-                return false;
+        const letter = document.getElementsByClassName("letter");
+        let showLength = $('.show').length;
+        let letterLength = $('.letter').length;
+        if (showLength === letterLength) {
+            this.gameOver(true);
         }
-        return true;
     };
 
-    //If the player guesses incorrectly, they lose a heart.
+    //***Increases the value of the missed property
+    //Removes a life from the scoreboard
+    //Checks if player has remaining lives and ends game if player is out*/
     removeLife() {
-        const lives = document.getElementsByClassName("tries");
-        lives[this.missed].firstElementChild.src = "images/lostHeart.png";
-
+        $('.tries img[src="images/liveHeart.png"]:first').attr('src', 'images/lostHeart.png', 'missed.tries');
         if (this.missed == 4) {
             this.gameOver(false);
+        } else {
+            this.missed++;
         }
-
-        this.missed++;
     };
 
-    // Display the original start screen overlay once the game is over.
+    //***Displays game over message @param {boolean} gameWon
+    //Whether or not the user won the game*/
     gameOver(gameWon) {
         let overlay = document.getElementById("overlay");
         overlay.style.display = "block";
 
-        // Get the overlay h1 element
         let game_over_message = document.getElementById("game-over-message");
 
-        // If the user won the game, display win message, else display loss
-        // message
         if (gameWon) {
-            game_over_message.innerText = "Great Job!";
-            overlay.className = overlay.className.replace(/\bstart\b/g, "win");
+            game_over_message.innerText = "Awesome!";
+            overlay.className = overlay.className.replace(/\bstart\b/, "win");
         } else {
-            game_over_message.innerText = "Sorry, better luck next time!";
-            overlay.className = overlay.className.replace(/\bstart\b/g, "lose");
+            game_over_message.innerText = "Sorry, try again!";
+            overlay.className = overlay.className.replace(/\bstart\b/, "lose");
         }
-
+        this.resetGame();
     };
 
-    phraseUl = document.getElementsByTagName("ul");
-    letters = document.querySelectorAll(".letter");
-    spaces = document.querySelectorAll(".space");
-
-    for (let l = 0; l < letters.length; l++) {
-        phraseUl[0].removeChild(letters[l]);
-    };
-
-    for (let s = 0; s < spaces.length; s++) {
-        phraseUl[0].removeChild(spaces[s]);
-    };
-
-    //Enable and update the onscreen keyboard buttons to use the 'key' CSS class
-    //and not use the 'chosen' or 'wrong' CSS classes as before.
-    const buttons = document.getElementsByClassName("key");
-
-    for (let b = 0; b < buttons.length; b++) {
-        buttons[b].disabled = false;
-
-        if (buttons[b].classList.contains("chosen"))
-            buttons[b].classList.remove("chosen");
-
-        if (buttons[b].classList.contains("wrong"))
-            buttons[b].classList.remove("wrong");
-    };
-
-    // Reset all of the hearts
-    const lives = document.getElementsByClassName("tries");
-    for (let h = 0; h < lives.length; v++) {
-        lives[h].firstElementChild.src = "images/liveHeart.png";
-    };
-
-    handleInteraction(button) {
-        button.disabled = true;
-
-        if (this.activePhrase.checkLetter(button.innerText)) {
-            button.classList.add("chosen");
-            this.activePhrase.showMatchedLetter(button.innerText);
-
-            if (this.checkForWin()) {
-                this.gameOver(true);
-            } else {
-                button.classList.add("wrong");
-                this.removeLife();
-            }
+    //***Handles onscreen keyboard button clocks @param (HTMLButtonElement) button
+    //The clicked button element*/
+    handleInteraction(e) {
+        if (this.activePhrase.checkLetter(e.target.textContent)) {
+            this.activePhrase.showMatchedLetter(e.target.textContent);
+            $(e.target).addClass('chosen').attr('disable', true);
+            this.checkForWin();
+        } else {
+            $(e.target).addClass('wrong').attr('disable', true);
+            this.removeLife();
         }
+    };
+
+    //this method resets the entire game by removing the li elements 
+    resetGame() {
+        $('#phrase ul li').remove();
+        $('.key').removeClass('chosen').removeClass('wrong').removeAttr('disabled');
+        $('.tries [src="images/lostHeart.png"]').attr('src', "images/liveHeart.png");
     };
 };

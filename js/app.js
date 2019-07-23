@@ -1,60 +1,37 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
- * app.js */
+ * app.js by Elizabeth Hinson*/
 
-//***Created an instance for the game class*/
+//  //***Created an instance for the game class*/
 let game;
 
-//Created event listeners for the start and onscreen keyboard buttons.
-const btn__reset = document.getElementById("btn__reset");
-const qwerty = document.getElementById("qwerty");
-
-btn__reset.addEventListener('click', function () {
+// //Created event listeners for the start and onscreen keyboard buttons.
+$('#btn__reset').on('click', function () {
     game = new Game();
     game.startGame();
 });
 
-qwerty.addEventListener('click', function (event) {
-    let target = event.target;
-    if (target.tagName != "BUTTON")
-        return;
-    game.handleInteraction(target);
+$('.key').on('click', function (key) {
+    game.handleInteraction(key);
 });
 
-// console.log(`Active Phrase - phrase: ${game.activePhrase.phrase} `);
-// console.log('Active Phrase - phrase: ${game.activePhrase.phrase}');
-// game.phrases.forEach((phrase, index) => {
-// console.log(`Phrase ${index} - phrase: ${phrase.phrase}`);
-// });
-// logPhrase(game.getRandomPhrase());
-// logPhrase(game.getRandomPhrase());
-// logPhrase(game.getRandomPhrase());
-// logPhrase(game.getRandomPhrase());
-// logPhrase(game.getRandomPhrase());
+// //Test for phrases:
 
+// // game.phrases.forEach((phrase, index) => {
+// //     console.log(`Phrase ${index} - phrase: ${phrase.phrase}`);
+// // });
 
-window.addEventListener("keydown", function (event) { //Added feature for extra credit so the keydown works using keyboard to enter letters
-    let clickedKey = String.fromCharCode(event.keyCode).toLowerCase();
-    const buttons = document.getElementsByClassName("key");
-    let s = 0;
+//const logPhrase = (phrase) => {
+//console.log(`Phrase - phrase: `, phrase.phrase);
+//const randomPhrase = game.getRandomPhrase();
+//const phrase = new Phrase(randomPhrase.phrase);
+//phrase.addPhraseToDisplay();
 
-    for (s = 0; s < buttons.length; s++) {
-        if (buttons[s].innerText == clickedKey)
-            break;
-    }
+//logPhrase(game.getRandomPhrase());
+//logPhrase(game.getRandomPhrase());
+//logPhrase(game.getRandomPhrase());
+//logPhrase(game.getRandomPhrase());
+//logPhrase(game.getRandomPhrase());
 
-    if (s != 26)
-        game.handleInteraction(buttons[s]);
-});
+//console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
 
-// game.phrases.forEach((phrase, section) => {
-// $('input:text').val("phrase", "section");
-// console.log(`Phrase ${section} - phrase: ${phrase.phrase}`);
-// });
-
-// const logPhrase = (phrase) => {
-// //$('input:text').val("phrase");
-// console.log(`Phrase - phrase: `, phrase.phrase);
-// };
-
-// game.getRandomPhrase().addPhraseToDisplay();
