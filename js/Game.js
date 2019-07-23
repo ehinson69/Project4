@@ -64,7 +64,7 @@ class Game {
             overlay.className = overlay.className.replace(/\bstart\b/, "win");
         } else {
             game_over_message.innerText = "Sorry, try again!";
-            overlay.className = overlay.className.replace(/\bstart\b/, "lose");
+            overlay.className = overlay.className.replace(/\bstart\b/, "lost");
         }
         this.resetGame();
     };
@@ -85,7 +85,7 @@ class Game {
     //this method resets the entire game by removing the li elements 
     resetGame() {
         $('#phrase ul li').remove();
-        $('.key').removeClass('chosen').removeClass('wrong').removeAttr('disabled');
+        $('.keyrow button').removeClass('chosen').removeClass('wrong').removeAttr('disabled');
         $('.tries [src="images/lostHeart.png"]').attr('src', "images/liveHeart.png");
     };
 };
