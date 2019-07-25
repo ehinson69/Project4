@@ -72,16 +72,18 @@ class Game {
     //***Handles onscreen keyboard button clocks @param (HTMLButtonElement) button
     //The clicked button element*/
     handleInteraction(e) {
-        if (this.activePhrase.checkLetter(e.target.textContent)) {
+        if (this.activePhrase.checkLetter(e.target.textContent)) {      
             this.activePhrase.showMatchedLetter(e.target.textContent);
             $(e.target).addClass('chosen').attr('disable', true);
-            this.checkForWin();
-        } else {
-            $(e.target).addClass('wrong').attr('disable', true);
-            this.removeLife();
-        }
+            if(this.checkForWin()) {
+                this.gameOver();
+            } else {
+                $(e.target).addClass('wrong').attr('disable', true);
+                this.removeLife();
+            }
+        };
     };
-
+    
     //this method resets the entire game by removing the li elements 
     resetGame() {
         $('#phrase ul li').remove();
