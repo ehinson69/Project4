@@ -2,10 +2,10 @@
  * Project 4 - OOP Game App
  * app.js by Elizabeth Hinson*/
 
-//  //***Created an instance for the game class*/
+//***Created an instance for the game class*/
 let game;
 
-// //Created event listeners for the start and onscreen keyboard buttons.
+//Created event listeners for the start and onscreen keyboard buttons.
 $('#btn__reset').on('click', function () {
     game = new Game();
     game.startGame();
