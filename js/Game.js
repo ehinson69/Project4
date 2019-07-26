@@ -44,27 +44,26 @@ class Game {
     //Checks if player has remaining lives and ends game if player is out*/
     removeLife() {
         $('.tries img[src="images/liveHeart.png"]:first').attr('src', 'images/lostHeart.png', 'missed.tries');
-        if (this.missed == 4) {
+        this.missed += 1;
+        if (this.missed === 5) {
             this.gameOver(false);
-        } else {
-            this.missed++;
         }
     };
 
     //***Displays game over message @param {boolean} gameWon
     //Whether or not the user won the game*/
-    gameOver(gameWon) {
+    gameOver() {
         let overlay = document.getElementById("overlay");
         overlay.style.display = "block";
 
         let game_over_message = document.getElementById("game-over-message");
 
-        if (gameWon) {
-            game_over_message.innerText = "Awesome!";
-            overlay.className = overlay.className.replace(/\bstart\b/, "win");
+        if (this.missed === 5) {
+            game_over_message.innerText = "Sorry, please try again!";
+            $("#overlay").removeClass("start").addClass("lose");
         } else {
-            game_over_message.innerText = "Sorry, try again!";
-            overlay.className = overlay.className.replace(/\bstart\b/, "lost");
+            game_over_message.innerText = "Awesome, good game!";
+            $("#overlay").removeClass("start").addClass("win");
         }
         this.resetGame();
     };
@@ -72,22 +71,28 @@ class Game {
     //***Handles onscreen keyboard button clocks @param (HTMLButtonElement) button
     //The clicked button element*/
     handleInteraction(e) {
-        if (this.activePhrase.checkLetter(e.target.textContent)) {      
-            this.activePhrase.showMatchedLetter(e.target.textContent);
-            $(e.target).addClass('chosen').attr('disable', true);
-            if(this.checkForWin()) {
-                this.gameOver();
-            } else {
-                $(e.target).addClass('wrong').attr('disable', true);
-                this.removeLife();
+        let $guess = $(e.target).text();
+        $(e.target).prop("disabled", true);
+        if (this.activePhrase.checkLetter($guess)) {
+            this.activePhrase.showMatchedLetter($guess);
+            $(e.target).addClass('chosen');
+            if (this.checkForWin()) {
+                this.gameOver(true);
             }
-        };
+        } else {
+            $(e.target).addClass("wrong");
+            this.removeLife();
+        }
     };
-    
+
     //this method resets the entire game by removing the li elements 
     resetGame() {
+        $('.tries img[src="images/lostHeart.png"]').attr('src', 'images/liveHeart.png', 'missed.tries');
         $('#phrase ul li').remove();
-        $('.keyrow button').removeClass('chosen').removeClass('wrong').removeAttr('disabled');
-        $('.tries [src="images/lostHeart.png"]').attr('src', "images/liveHeart.png");
+        $('.key')
+            .removeClass('chosen')
+            .removeClass('wrong')
+            .removeAttr('disabled');
     };
+
 };

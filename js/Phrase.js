@@ -25,7 +25,7 @@ class Phrase {
            }
        });
    }
-   checkLetter(key){
+    checkLetter(key){
        return this.phrase.includes(key); //Checks if selected letter is in phrase
    }
    

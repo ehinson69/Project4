@@ -48,9 +48,12 @@ Code Examples
 C:\Users\hinsel4\Documents\GitHub\Project4\index.html
 
 Features
-Color changes of background per win or lose.
-Color changes on keyboard if correct or incorrect letters are chosen.
-Message at end of game that celebrates or encourages users to try again.
+Color changed of background per win (green) or lose (red).
+Color changed on keys if correct (blue) or incorrect (orange) letters are chosen.
+Messages at end of game that celebrates or encourages users to try again.
+Added a .gif background for display.
+Changed color (white) on the heading, so users can see it, due to the background color change.
+
 
 Status
 Project is: finished

@@ -30,6 +30,11 @@ body {
   height: 100vh;
 }
 
+body{
+  background-image: url(https://media.giphy.com/media/xThuVYIRVVaP3ghJXG/giphy.gif);
+  background-size: cover;
+}
+
 li, ol, ul {
   padding: 0;
   display: inline-block;
@@ -86,7 +91,7 @@ button {
 /* Title */
 
 .header {
-  color: #3a3f58;
+  color: #dadae6;
 }
 
 
@@ -101,6 +106,7 @@ button {
   color: transparent;
   background: var(--color-neutral-light);
   border-radius: 5px;
+  user-select: none;
 }
 
 .space {
@@ -180,7 +186,7 @@ button {
 }
 
 .start {
-  background-color: #3a3f58;
+  background-color: #583a49;
 }
 
 .start a {
@@ -188,7 +194,7 @@ button {
 }
 
 .win {
-  background-color: var(--color-win);
+  background-color: #78CF82;
 }
 
 .win a {
