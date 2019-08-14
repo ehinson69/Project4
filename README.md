@@ -1,16 +1,6 @@
 # Project4
 OOP Game Show App
 
-Table of contents:
-General info
-Screenshots
-Technologies
-Setup
-Features
-Status
-Inspiration
-Contact
-
 General info
 My project is a phrase game. A user will choose letters to complete the phrases. If the user guesses correctly, the letter changes to blue, if they guess incorrectly, the letter changes to pink and loses a heart. After completing the phrases, the background will change red for a loss and green for a win. there will be a win or lose message appear at the end to celebrate or try again. 
 
