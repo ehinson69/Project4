@@ -137,14 +137,14 @@ button {
 }
 
 .chosen {
-  background: #3a3f58;
+  background: #1cadb3;
   border-radius: 5px;
   font-size: var(--font-size-medium);
   color: #FFFFFF;
 }
 
 .wrong {
-  background: #f7a964;
+  background: #c2400c;
   color: #FFFFFF;
 }
 
@@ -182,11 +182,11 @@ button {
 }
 
 .title {
-  color: #FFF;
+  color: rgb(27, 26, 26);
 }
 
 .start {
-  background-color: #583a49;
+  background-color: #a14e78;
 }
 
 .start a {
@@ -194,7 +194,7 @@ button {
 }
 
 .win {
-  background-color: #78CF82;
+  background-color: rgb(8, 128, 34);
 }
 
 .win a {
@@ -202,7 +202,7 @@ button {
 }
 
 .lose {
-  background-color: #f5785f;
+  background-color: #f55f5f;
 }
 
 .lose a {
